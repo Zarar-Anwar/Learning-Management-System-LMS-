@@ -16,7 +16,15 @@ try {
 const db={}
 db.sequelize=sequelize
 db.Sequelize=Sequelize
-db.student=require('./student')(sequelize,DataTypes)
+db.teacher=require('./Teacher')(sequelize,DataTypes)
+db.student=require('./Students')(sequelize,DataTypes)
+db.social=require('./SocialLinks')(sequelize,DataTypes)
+db.info=require('./Info')(sequelize,DataTypes)
+db.user=require('./User')(sequelize,DataTypes)
+
+
+
+
 db.sequelize.sync({})
 
 module.exports=db
