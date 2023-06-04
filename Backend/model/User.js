@@ -1,28 +1,63 @@
-module.exports=(sequelize,DataTypes)=>{
-    const user= sequelize.define('user',{
-        email:{type:DataTypes.STRING,
-        validate:{
-            isEmail:true
+const mongoose=require('mongoose')
+
+const userSchema=new mongoose.Schema(
+    {
+       
+        name: {
+          type: String,
+          required: true,
+          trim: true,
         },
-        allowNull:false,
-        unique:true
+      
+      
+        country: {
+          type: String,
+          required: true,
         },
-        username:{type:DataTypes.STRING,
-        allowNull:false
+     
+        email: {
+          type: String,
+          required: true,
         },
-        password:{type:DataTypes.STRING,
-        allowNull:false
+        password: {
+          type: String,
+          required: true,
         },
-        is_Admin:{type:DataTypes.BOOLEAN,
-        defaultValue:false
+        
+        is_active: {
+          type: Number,
+          default:false
         },
-        is_Teacher:{type:DataTypes.BOOLEAN,
-        defaultValue:false
+          cnic: {
+            type: String,
+          },
+          department: {
+            type: String,
+          },
+        is_verified: {
+          type: Boolean,
+          default:false
         },
-        is_Student:{type:DataTypes.BOOLEAN,
-        defaultValue:false
+        profile_picture: {
+          data: Buffer,
+          contentType: String,
         },
-    })
-    user.hasMany(sequelize.models.student, { foreignKey: 'userId' });
-    return user
-}
+       
+        phone: {
+          type: String,
+        },
+        isStudent:{
+          type:Boolean,
+          default:false
+        }
+      
+      },
+      {
+        timestamps: true,
+      }
+    );
+   
+
+const userModel= mongoose.model("user",userSchema)
+
+module.exports= userModel
